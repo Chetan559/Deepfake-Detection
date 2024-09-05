@@ -71,8 +71,18 @@ def main():
                 st.audio(uploaded_file)
                 #create a waveform
                 fig = px. line()
-                fig.add_scatter(x=list(range(len(audio_clip.squeeze()))), y=audio_clip.squeezefig.update_layout(title="Waveform Plot",xaxis_title = "Time",yaxis_title="Amplitude" st.plotly_chart(fig, use_container_width=True)))
+                fig.add_scatter(x=list(range(len(audio_clip.squeeze()))), y=audio_clip.squeeze())
+                fig.update_layout(
+                    title="Waveform Plot",
+                    xaxis_title = "Time",
+                    yaxis_title="Amplitude")
+                st.plotly_chart(fig, use_container_width=True)
 
             with col3:
                 st.info("Disclaimer")
                 st.warning("These classification or detection mechanisms are not always accurate. They should be considered as a strong signal and not the ultimate decision makers.")
+                
+                
+                
+if __name__ == "__main__":
+    main()
