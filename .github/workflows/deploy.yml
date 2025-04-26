@@ -1,0 +1,41 @@
+name: Deploy Vite app to GitHub Pages
+
+on:
+  push:
+    branches:
+      - main # Change this to the branch you want to deploy from (e.g., "main" or "master")
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      # Step 1: Checkout code from GitHub
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      # Step 2: Setup Node.js (install Node.js)
+      - name: Set up Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: "16" # You can change this to the version you're using
+
+      # Step 3: Install dependencies
+      - name: Install dependencies
+        run: |
+          cd app/frontend
+          npm install
+
+      # Step 4: Build Vite project
+      - name: Build the project
+        run: |
+          cd app/frontend
+          npm run build
+
+      # Step 5: Deploy to GitHub Pages
+      - name: Deploy to GitHub Pages
+        run: |
+          cd app/frontend
+          npm run deploy
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
